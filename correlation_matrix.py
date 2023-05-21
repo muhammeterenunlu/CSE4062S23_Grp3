@@ -5,16 +5,6 @@ from pandas.api.types import CategoricalDtype
 import os
 
 def correlation_matrix_analysis(data):
-    # Define order for PRIORITY and URGENCY
-    priority_order = CategoricalDtype(['Trivial', 'Minor', 'Major', 'Critical', 'Blocker'], ordered=True)
-    urgency_order = CategoricalDtype(['Low', 'Medium', 'High'], ordered=True)
-
-    # Convert PRIORITY and URGENCY to ordinal
-    data['PRIORITY'] = data['PRIORITY'].astype(priority_order)
-    data['URGENCY'] = data['URGENCY'].astype(urgency_order)
-
-    # Apply one hot encoding
-    data = pd.get_dummies(data, columns=['PRIORITY', 'URGENCY'])
 
     # Select only the columns you're interested in
     selected_columns = [
@@ -41,11 +31,6 @@ def correlation_matrix_analysis(data):
     sns.heatmap(corr, annot=True, cmap="coolwarm", ax=ax)
     plt.title("Correlation Matrix - Selected Columns Only")
     plt.savefig(os.path.join("figures", "correlation_matrix_selected.png"), dpi=300)
-    
-    # Print the first 10 rows of the transformed dataset
-    print("\nFirst 10 rows of the transformed dataset:")
-    print(data[selected_columns].head(10))
-
     plt.close()
 
     return data
