@@ -14,4 +14,26 @@ def prepare_data(data):
     # Apply one hot encoding
     data = pd.get_dummies(data, columns=['PRIORITY', 'URGENCY'])
 
+    # Define your ordinal columns
+    ordinal_boolean_columns = [
+        'PRIORITY_Trivial',
+        'PRIORITY_Minor',
+        'PRIORITY_Major',
+        'PRIORITY_Critical',
+        'PRIORITY_Blocker',
+        'URGENCY_Low',
+        'URGENCY_Medium',
+        'URGENCY_High',
+    ]
+
+    for column in ordinal_boolean_columns:
+        # Convert boolean to int
+        if data[column].dtype == 'bool':
+            data[column] = data[column].astype(int)
+        
+        # Check for missing values
+        if data[column].isnull().any():
+            # Fill missing values with 0 or appropriate value
+            data[column] = data[column].fillna(0)
+
     return data

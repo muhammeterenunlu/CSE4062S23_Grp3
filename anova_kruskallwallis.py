@@ -29,15 +29,6 @@ def anova_kruskallwallis_analysis(data):
     for column in numerical_and_ordinal_columns:
         print(f"\nAnalyzing relationship between {class_attribute} and {column}")
 
-        # Convert boolean to int
-        if data[column].dtype == 'bool':
-            data[column] = data[column].astype(int)
-            
-        # Check for missing values
-        if data[column].isnull().any():
-            # Fill missing values with 0 or appropriate value
-            data[column] = data[column].fillna(0)
-
         # Conduct ANOVA test for this column and the class attribute
         model = ols(f'{column} ~ C({class_attribute})', data=data).fit()
         anova_table = sm.stats.anova_lm(model, typ=2)
