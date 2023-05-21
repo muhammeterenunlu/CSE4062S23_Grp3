@@ -8,14 +8,8 @@ def correlation_matrix_analysis(data):
 
     # Select only the columns you're interested in
     selected_columns = [
-        'PRIORITY_Trivial',
-        'PRIORITY_Minor',
-        'PRIORITY_Major',
-        'PRIORITY_Critical',
-        'PRIORITY_Blocker',
-        'URGENCY_Low',
-        'URGENCY_Medium',
-        'URGENCY_High',
+        'PRIORITY',
+        'URGENCY',
         'Total_Assignee',
         'Total_Worklog_Assginee',
         'Total_Log_Hours_Assignee',
