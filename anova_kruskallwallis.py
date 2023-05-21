@@ -8,14 +8,8 @@ def anova_kruskallwallis_analysis(data):
 
     # Define your numerical and ordinal columns
     numerical_and_ordinal_columns = [
-        'PRIORITY_Trivial',
-        'PRIORITY_Minor',
-        'PRIORITY_Major',
-        'PRIORITY_Critical',
-        'PRIORITY_Blocker',
-        'URGENCY_Low',
-        'URGENCY_Medium',
-        'URGENCY_High',
+        'PRIORITY',
+        'URGENCY',
         'Total_Assignee',
         'Total_Worklog_Assginee',
         'Total_Log_Hours_Assignee',
@@ -25,6 +19,10 @@ def anova_kruskallwallis_analysis(data):
 
     # Your class attribute
     class_attribute = 'ISSUE_CATEGORY'
+
+    # Convert necessary columns back to numeric type before ANOVA and Kruskal-Wallis tests
+    for column in numerical_and_ordinal_columns:
+        data[column] = pd.to_numeric(data[column], errors='coerce')
 
     for column in numerical_and_ordinal_columns:
         print(f"\nAnalyzing relationship between {class_attribute} and {column}")
