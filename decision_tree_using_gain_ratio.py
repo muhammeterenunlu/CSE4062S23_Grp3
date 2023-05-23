@@ -15,7 +15,7 @@ def decision_tree_classification_gain(data):
     tree = DecisionTreeClassifier(criterion="entropy", random_state=42)
     
     # Implement bagging
-    clf = BaggingClassifier(estimator=tree, n_estimators=10, random_state=42)
+    clf = BaggingClassifier(estimator=tree, n_estimators=20, random_state=42)
 
     # Train the model using cross-validation on the training set
     kf = KFold(n_splits=10, shuffle=True, random_state=42)
