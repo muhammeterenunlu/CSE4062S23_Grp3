@@ -8,8 +8,6 @@ def chi_square_analysis(data):
     nominal_columns = [
         'COMPONENT',
         'IMPACT',
-        'POZISYON',
-        'IS_BILGISI',
         'ASSIGNEE',
         'ISSUE_TYPE',
     ]
