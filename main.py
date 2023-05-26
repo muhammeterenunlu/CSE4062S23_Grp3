@@ -3,7 +3,7 @@ import pandas as pd
 from preprocessing import prepare_data
 from chi_square import chi_square_analysis
 #from anova_kruskallwallis import anova_kruskallwallis_analysis
-from decision_tree_using_gain_ratio import decision_tree_classification_gain, evaluate_model_gain_ratio
+from decision_tree_using_info_gain import decision_tree_classification_info_gain, evaluate_model_info_gain
 from decision_tree_using_gini_index import decision_tree_classification_gini, evaluate_model_gini_index
 from decision_tree_using_gradient_boosting import decision_tree_classification_gradient_boosting, evaluate_model_gradient_boosting
 from ann_using_1_hl_adam import ann_1_hidden_layer_classification_adam, evaluate_ann_1_hidden_layer_adam
@@ -46,16 +46,16 @@ def main():
     # How many rows and columns are there in the preprocessed data?
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
-    # Decision tree using Information Gain Gain Ratio classification
-    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain = decision_tree_classification_gain(data)
+    # Decision tree using Information Gain classification
+    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain = decision_tree_classification_info_gain(data)
 
     # Evaluate model
-    results_gain = evaluate_model_gain_ratio(y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
+    results_gain = evaluate_model_info_gain(y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
     # Calculate error rates
     error_rate_train_gain = 1 - results_gain['train']['accuracy']
     error_rate_test_gain = 1 - results_gain['test']['accuracy']
 
-    print("Decision Tree using Gain Ratio")
+    print("Decision Tree using Information Gain")
     print("------------------------------")
     print("Training set results:")
     print("Accuracy:", results_gain['train']['accuracy'])
