@@ -48,7 +48,7 @@ def main():
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
     # Decision tree using Information Gain classification
-    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain = decision_tree_classification_info_gain(data)
+    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain, y_train_prob_gain, y_test_prob_gain = decision_tree_classification_info_gain(data)
 
     # Evaluate model
     results_gain = evaluate_model_info_gain(y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
@@ -56,7 +56,7 @@ def main():
     error_rate_train_gain = 1 - results_gain['train']['accuracy']
     error_rate_test_gain = 1 - results_gain['test']['accuracy']
 
-    print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rate_test_gain)
+    print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rate_test_gain, y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
 
     # Decision tree using Gini Index classification
     y_train_gini, y_train_pred_gini, y_test_gini, y_pred_gini = decision_tree_classification_gini(data)
@@ -66,8 +66,8 @@ def main():
     # Calculate error rates
     error_rate_train_gini = 1 - results_gini['train']['accuracy']
     error_rate_test_gini = 1 - results_gini['test']['accuracy']
-
-    print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_rate_test_gini)
+    (results_gini, error_rate_train_gini, error_rate_test_gini)
+    print_decision_tree_gini_index(results_gain, error_rate_train_gain, error_rate_test_gain, y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
    
     # Decision tree using Gradient Boosting classification
     y_train_gb, y_train_pred_gb, y_test_gb, y_pred_gb = decision_tree_classification_gradient_boosting(data)

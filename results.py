@@ -1,4 +1,11 @@
-def print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rate_test_gain):
+from sklearn.metrics import confusion_matrix
+
+def print_confusion_matrix(y_true, y_pred, title="Confusion Matrix"):
+    cm = confusion_matrix(y_true, y_pred)
+    print(f"\n{title}:")
+    print(cm)
+
+def print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rate_test_gain, y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain):
     print("Decision Tree using Information Gain")
     print("------------------------------")
     print("Training set results:")
@@ -6,17 +13,19 @@ def print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rat
     print("Recall:", results_gain['train']['recall'])
     print("Precision:", results_gain['train']['precision'])
     print("F1 Score:", results_gain['train']['f1_score'])
+    print_confusion_matrix(y_train_gain, y_train_pred_gain, title="Training Set Confusion Matrix")
 
     print("\nTest set results:")
     print("Accuracy:", results_gain['test']['accuracy'])
     print("Recall:", results_gain['test']['recall'])
     print("Precision:", results_gain['test']['precision'])
     print("F1 Score:", results_gain['test']['f1_score'])
+    print_confusion_matrix(y_test_gain, y_pred_gain, title="Test Set Confusion Matrix")
 
     print("\nError Rate (Training):", error_rate_train_gain)
     print("Error Rate (Test):", error_rate_test_gain)
 
-def print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_rate_test_gini):
+def print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_rate_test_gini, y_train_gini, y_train_pred_gini, y_test_gini, y_pred_gini):
     print("\nDecision Tree using Gini Index")
     print("--------------------------------")
     print("Training set results:")
@@ -24,12 +33,14 @@ def print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_ra
     print("Recall:", results_gini['train']['recall'])
     print("Precision:", results_gini['train']['precision'])
     print("F1 Score:", results_gini['train']['f1_score'])
+    print_confusion_matrix(y_train_gini, y_train_pred_gini, title="Training Set Confusion Matrix")
 
     print("\nTest set results:")
     print("Accuracy:", results_gini['test']['accuracy'])
     print("Recall:", results_gini['test']['recall'])
     print("Precision:", results_gini['test']['precision'])
     print("F1 Score:", results_gini['test']['f1_score'])
+    print_confusion_matrix(y_test_gini, y_pred_gini, title="Test Set Confusion Matrix")
 
     print("\nError Rate (Training):", error_rate_train_gini)
     print("Error Rate (Test):", error_rate_test_gini)
