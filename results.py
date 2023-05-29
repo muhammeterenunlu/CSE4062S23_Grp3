@@ -1,4 +1,4 @@
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, f1_score
 
 def print_confusion_matrix(y_true, y_pred, title="Confusion Matrix"):
     cm = confusion_matrix(y_true, y_pred)
@@ -13,6 +13,8 @@ def print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rat
     print("Recall:", results_gain['train']['recall'])
     print("Precision:", results_gain['train']['precision'])
     print("F1 Score:", results_gain['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_gain, y_train_pred_gain, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_gain, y_train_pred_gain, average='micro'))
     print_confusion_matrix(y_train_gain, y_train_pred_gain, title="Training Set Confusion Matrix")
 
     print("\nTest set results:")
@@ -20,6 +22,8 @@ def print_decision_tree_info_gain(results_gain, error_rate_train_gain, error_rat
     print("Recall:", results_gain['test']['recall'])
     print("Precision:", results_gain['test']['precision'])
     print("F1 Score:", results_gain['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_gain, y_pred_gain, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_gain, y_pred_gain, average='micro'))
     print_confusion_matrix(y_test_gain, y_pred_gain, title="Test Set Confusion Matrix")
 
     print("\nError Rate (Training):", error_rate_train_gain)
@@ -33,6 +37,8 @@ def print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_ra
     print("Recall:", results_gini['train']['recall'])
     print("Precision:", results_gini['train']['precision'])
     print("F1 Score:", results_gini['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_gini, y_train_pred_gini, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_gini, y_train_pred_gini, average='micro'))
     print_confusion_matrix(y_train_gini, y_train_pred_gini, title="Training Set Confusion Matrix")
 
     print("\nTest set results:")
@@ -40,12 +46,14 @@ def print_decision_tree_gini_index(results_gini, error_rate_train_gini, error_ra
     print("Recall:", results_gini['test']['recall'])
     print("Precision:", results_gini['test']['precision'])
     print("F1 Score:", results_gini['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_gini, y_pred_gini, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_gini, y_pred_gini, average='micro'))
     print_confusion_matrix(y_test_gini, y_pred_gini, title="Test Set Confusion Matrix")
 
     print("\nError Rate (Training):", error_rate_train_gini)
     print("Error Rate (Test):", error_rate_test_gini)
 
-def print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error_rate_test_gb):
+def print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error_rate_test_gb, y_train_gb, y_train_pred_gb, y_test_gb, y_pred_gb):
     print("\nDecision Tree using Gradient Boosting")
     print("-----------------")
     print("Training set results:")
@@ -53,12 +61,18 @@ def print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error
     print("Recall:", results_gb['train']['recall'])
     print("Precision:", results_gb['train']['precision'])
     print("F1 Score:", results_gb['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_gb, y_train_pred_gb, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_gb, y_train_pred_gb, average='micro'))
+    print_confusion_matrix(y_train_gb, y_train_pred_gb, title="Training Set Confusion Matrix")
 
     print("\nTest set results:")
     print("Accuracy:", results_gb['test']['accuracy'])
     print("Recall:", results_gb['test']['recall'])
     print("Precision:", results_gb['test']['precision'])
     print("F1 Score:", results_gb['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_gb, y_pred_gb, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_gb, y_pred_gb, average='micro'))
+    print_confusion_matrix(y_test_gb, y_pred_gb, title="Test Set Confusion Matrix")
 
     print("\nError Rate (Training):", error_rate_train_gb)
     print("Error Rate (Test):", error_rate_test_gb)
@@ -81,7 +95,7 @@ def print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam
     print("\nError Rate (Training):", error_rate_train_ann1_adam)
     print("Error Rate (Test):", error_rate_test_ann1_adam)
 
-def print_ann_1_hidden_layer_sgd(results_ann_1_sgd, error_rate_train_ann1_sgd, error_rate_test_ann1_sgd):
+def print_ann_1_hidden_layer_sgd(results_ann_1_sgd, error_rate_train_ann1_sgd, error_rate_test_ann1_sgd, y_train_ann1_sgd, y_train_pred_ann1_sgd, y_test_ann1_sgd, y_pred_ann1_sgd):
     print("\nANN with 1 Hidden Layer (SGD Optimizer)")
     print("-----------------------------------------")
     print("Training set results:")
@@ -89,18 +103,21 @@ def print_ann_1_hidden_layer_sgd(results_ann_1_sgd, error_rate_train_ann1_sgd, e
     print("Recall:", results_ann_1_sgd['train']['recall'])
     print("Precision:", results_ann_1_sgd['train']['precision'])
     print("F1 Score:", results_ann_1_sgd['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_ann1_sgd, y_train_pred_ann1_sgd, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_ann1_sgd, y_train_pred_ann1_sgd, average='micro'))
 
     print("\nTest set results:")
     print("Accuracy:", results_ann_1_sgd['test']['accuracy'])
     print("Recall:", results_ann_1_sgd['test']['recall'])
     print("Precision:", results_ann_1_sgd['test']['precision'])
     print("F1 Score:", results_ann_1_sgd['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_ann1_sgd, y_pred_ann1_sgd, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_ann1_sgd, y_pred_ann1_sgd, average='micro'))
 
     print("\nError Rate (Training):", error_rate_train_ann1_sgd)
     print("Error Rate (Test):", error_rate_test_ann1_sgd)
 
-
-def print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann1_rmsprop, error_rate_test_ann1_rmsprop):
+def print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann1_rmsprop, error_rate_test_ann1_rmsprop, y_train_ann1_rmsprop, y_train_pred_ann1_rmsprop, y_test_ann1_rmsprop, y_pred_ann1_rmsprop):
     print("\nANN with 1 Hidden Layer (RMSprop Optimizer)")
     print("---------------------------------------------")
     print("Training set results:")
@@ -108,12 +125,16 @@ def print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann
     print("Recall:", results_ann_1_rmsprop['train']['recall'])
     print("Precision:", results_ann_1_rmsprop['train']['precision'])
     print("F1 Score:", results_ann_1_rmsprop['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_ann1_rmsprop, y_train_pred_ann1_rmsprop, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_ann1_rmsprop, y_train_pred_ann1_rmsprop, average='micro'))
 
     print("\nTest set results:")
     print("Accuracy:", results_ann_1_rmsprop['test']['accuracy'])
     print("Recall:", results_ann_1_rmsprop['test']['recall'])
     print("Precision:", results_ann_1_rmsprop['test']['precision'])
     print("F1 Score:", results_ann_1_rmsprop['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_ann1_rmsprop, y_pred_ann1_rmsprop, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_ann1_rmsprop, y_pred_ann1_rmsprop, average='micro'))
 
     print("\nError Rate (Training):", error_rate_train_ann1_rmsprop)
     print("Error Rate (Test):", error_rate_test_ann1_rmsprop)

@@ -48,7 +48,7 @@ def main():
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
     # Decision tree using Information Gain classification
-    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain, y_train_prob_gain, y_test_prob_gain = decision_tree_classification_info_gain(data)
+    y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain = decision_tree_classification_info_gain(data)
 
     # Evaluate model
     results_gain = evaluate_model_info_gain(y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain)
