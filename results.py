@@ -138,3 +138,28 @@ def print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann
 
     print("\nError Rate (Training):", error_rate_train_ann1_rmsprop)
     print("Error Rate (Test):", error_rate_test_ann1_rmsprop)
+
+def print_linear_svm(results_svm, error_rate_train_svm, error_rate_test_svm, y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm):
+    print("Linear SVM")
+    print("------------------------------")
+    print("Training set results:")
+    print("Accuracy:", results_svm['train']['accuracy'])
+    print("Recall:", results_svm['train']['recall'])
+    print("Precision:", results_svm['train']['precision'])
+    print("F1 Score:", results_svm['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_svm, y_train_pred_svm, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_svm, y_train_pred_svm, average='micro'))
+    print_confusion_matrix(y_train_svm, y_train_pred_svm, title="Training Set Confusion Matrix")
+
+    print("\nTest set results:")
+    print("Accuracy:", results_svm['test']['accuracy'])
+    print("Recall:", results_svm['test']['recall'])
+    print("Precision:", results_svm['test']['precision'])
+    print("F1 Score:", results_svm['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_svm, y_pred_svm, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_svm, y_pred_svm, average='micro'))
+    print_confusion_matrix(y_test_svm, y_pred_svm, title="Test Set Confusion Matrix")
+
+    print("\nError Rate (Training):", error_rate_train_svm)
+    print("Error Rate (Test):", error_rate_test_svm)
+

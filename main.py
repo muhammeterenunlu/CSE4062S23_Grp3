@@ -8,7 +8,8 @@ from decision_tree_using_gradient_boosting import decision_tree_classification_g
 from ann_using_1_hl_adam import ann_1_hidden_layer_classification_adam, evaluate_ann_1_hidden_layer_adam
 from ann_using_1_hl_sgd import ann_1_hidden_layer_classification_sgd, evaluate_ann_1_hidden_layer_sgd
 from ann_using_1_hl_rmsprop import ann_1_hidden_layer_classification_rmsprop, evaluate_ann_1_hidden_layer_rmsprop
-from results import print_decision_tree_info_gain, print_decision_tree_gini_index, print_decision_tree_gradient_boosting, print_ann_1_hidden_layer_adam, print_ann_1_hidden_layer_sgd, print_ann_1_hidden_layer_rmsprop
+from linear_svm import linear_svm_classification, evaluate_linear_svm
+from results import print_decision_tree_info_gain, print_decision_tree_gini_index, print_decision_tree_gradient_boosting, print_ann_1_hidden_layer_adam, print_ann_1_hidden_layer_sgd, print_ann_1_hidden_layer_rmsprop, print_linear_svm
 
 
 def main():
@@ -117,6 +118,17 @@ def main():
     error_rate_test_ann1_rmsprop = 1 - results_ann_1_rmsprop['test']['accuracy']
 
     print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann1_rmsprop, error_rate_test_ann1_rmsprop)
+
+    # Linear SVM classification
+    y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm = linear_svm_classification(data)
+
+    # Evaluate model
+    results_svm = evaluate_linear_svm(y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm)
+    # Calculate error rates
+    error_rate_train_svm = 1 - results_svm['train']['accuracy']
+    error_rate_test_svm = 1 - results_svm['test']['accuracy']
+
+    print_linear_svm(results_svm, error_rate_train_svm, error_rate_test_svm, y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm)
 
 # Call the function
 main()
