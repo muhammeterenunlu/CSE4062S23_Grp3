@@ -1,8 +1,8 @@
 from sklearn.model_selection import train_test_split, KFold, cross_val_predict
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
-from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
 
-def naive_bayes_classification_gaussian(data):
+def linear_svm_classification(data):
     # Prepare the dataset
     X = data.drop('ISSUE_CATEGORY', axis=1)
     y = data['ISSUE_CATEGORY']
@@ -10,23 +10,22 @@ def naive_bayes_classification_gaussian(data):
     # Split data into training and test sets using holdout method
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-    # Create the Gaussian Naive Bayes classifier
-    clf = GaussianNB()
+    # Create the linear SVM classifier
+    svm = SVC(kernel="linear", random_state=42)
 
     # Train the model using cross-validation on the training set
     kf = KFold(n_splits=10, shuffle=True, random_state=42)
-
-    y_train_pred = cross_val_predict(clf, X_train, y_train, cv=kf)
+    y_train_pred = cross_val_predict(svm, X_train, y_train, cv=kf)
 
     # Train the model on the full training set
-    clf.fit(X_train, y_train)
+    svm.fit(X_train, y_train)
 
     # Make predictions on the test set
-    y_pred = clf.predict(X_test)
+    y_pred = svm.predict(X_test)
 
     return y_train, y_train_pred, y_test, y_pred
 
-def evaluate_model_gaussian_naive_bayes(y_train, y_train_pred, y_test, y_pred):
+def evaluate_linear_svm(y_train, y_train_pred, y_test, y_pred):
     acc_train = accuracy_score(y_train, y_train_pred)
     acc_test = accuracy_score(y_test, y_pred)
     recall_train = recall_score(y_train, y_train_pred, average='weighted', zero_division=1)

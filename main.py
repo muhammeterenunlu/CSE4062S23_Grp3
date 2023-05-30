@@ -9,7 +9,10 @@ from ann_using_1_hl_adam import ann_1_hidden_layer_classification_adam, evaluate
 from ann_using_1_hl_sgd import ann_1_hidden_layer_classification_sgd, evaluate_ann_1_hidden_layer_sgd
 from ann_using_1_hl_rmsprop import ann_1_hidden_layer_classification_rmsprop, evaluate_ann_1_hidden_layer_rmsprop
 from linear_svm import linear_svm_classification, evaluate_linear_svm
-from results import print_decision_tree_info_gain, print_decision_tree_gini_index, print_decision_tree_gradient_boosting, print_ann_1_hidden_layer_adam, print_ann_1_hidden_layer_sgd, print_ann_1_hidden_layer_rmsprop, print_linear_svm
+from naive_bayes_bernoulli import naive_bayes_classification_bernoulli, evaluate_model_bernoulli_naive_bayes
+from naive_bayes_gaussian import naive_bayes_classification_gaussian, evaluate_model_gaussian_naive_bayes
+from naive_bayes_multinomial import naive_bayes_classification_multinomial, evaluate_model_multinomial_naive_bayes
+from results import print_decision_tree_info_gain, print_decision_tree_gini_index, print_decision_tree_gradient_boosting, print_ann_1_hidden_layer_adam, print_ann_1_hidden_layer_sgd, print_ann_1_hidden_layer_rmsprop, print_linear_svm, print_bernoulli_naive_bayes, print_gaussian_naive_bayes, print_multinomial_naive_bayes
 
 
 def main():
@@ -48,6 +51,39 @@ def main():
     # How many rows and columns are there in the preprocessed data?
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
+    # Naive Bayes bernoulli classification
+    y_train_nb_bernoulli, y_train_pred_nb_bernoulli, y_test_nb_bernoulli, y_pred_nb_bernoulli = naive_bayes_classification_bernoulli(data)
+
+    # Evaluate model
+    results_nb_bernoulli = evaluate_model_bernoulli_naive_bayes(y_train_nb_bernoulli, y_train_pred_nb_bernoulli, y_test_nb_bernoulli, y_pred_nb_bernoulli)
+    # Calculate error rates
+    error_rate_train_nb_bernoulli = 1 - results_nb_bernoulli['train']['accuracy']
+    error_rate_test_nb_bernoulli = 1 - results_nb_bernoulli['test']['accuracy']
+
+    print_bernoulli_naive_bayes(results_nb_bernoulli, error_rate_train_nb_bernoulli, error_rate_test_nb_bernoulli, y_train_nb_bernoulli, y_train_pred_nb_bernoulli, y_test_nb_bernoulli, y_pred_nb_bernoulli)
+
+    # Naive Bayes gaussian classification
+    y_train_nb_gaussian, y_train_pred_nb_gaussian, y_test_nb_gaussian, y_pred_nb_gaussian = naive_bayes_classification_gaussian(data)
+
+    # Evaluate model
+    results_nb_gaussian = evaluate_model_gaussian_naive_bayes(y_train_nb_gaussian, y_train_pred_nb_gaussian, y_test_nb_gaussian, y_pred_nb_gaussian)
+    # Calculate error rates
+    error_rate_train_nb_gaussian = 1 - results_nb_gaussian['train']['accuracy']
+    error_rate_test_nb_gaussian = 1 - results_nb_gaussian['test']['accuracy']
+
+    print_gaussian_naive_bayes(results_nb_gaussian, error_rate_train_nb_gaussian, error_rate_test_nb_gaussian, y_train_nb_gaussian, y_train_pred_nb_gaussian, y_test_nb_gaussian, y_pred_nb_gaussian)
+
+    # Naive Bayes multinomial classification
+    y_train_nb_multinomial, y_train_pred_nb_multinomial, y_test_nb_multinomial, y_pred_nb_multinomial = naive_bayes_classification_multinomial(data)
+
+    # Evaluate model
+    results_nb_multinomial = evaluate_model_multinomial_naive_bayes(y_train_nb_multinomial, y_train_pred_nb_multinomial, y_test_nb_multinomial, y_pred_nb_multinomial)
+    # Calculate error rates
+    error_rate_train_nb_multinomial = 1 - results_nb_multinomial['train']['accuracy']
+    error_rate_test_nb_multinomial = 1 - results_nb_multinomial['test']['accuracy']
+
+    print_multinomial_naive_bayes(results_nb_multinomial, error_rate_train_nb_multinomial, error_rate_test_nb_multinomial, y_train_nb_multinomial, y_train_pred_nb_multinomial, y_test_nb_multinomial, y_pred_nb_multinomial)
+
     # Decision tree using Information Gain classification
     y_train_gain, y_train_pred_gain, y_test_gain, y_pred_gain = decision_tree_classification_info_gain(data)
 
@@ -79,7 +115,7 @@ def main():
     error_rate_train_gb = 1 - results_gb['train']['accuracy']
     error_rate_test_gb = 1 - results_gb['test']['accuracy']
 
-    print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error_rate_test_gb)
+    print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error_rate_test_gb, y_train_gb, y_train_pred_gb, y_test_gb, y_pred_gb)
 
     # ANN with 1 hidden layer classification (ADAM)
     y_train_ann_1_adam, y_train_pred_ann_1_adam, y_test_ann_1_adam, y_pred_ann_1_adam = ann_1_hidden_layer_classification_adam(data)
@@ -90,7 +126,7 @@ def main():
     error_rate_train_ann1_adam = 1 - results_ann_1_adam['train']['accuracy']
     error_rate_test_ann1_adam = 1 - results_ann_1_adam['test']['accuracy']
 
-    print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam, error_rate_test_ann1_adam)
+    print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam, error_rate_test_ann1_adam, y_train_ann_1_adam, y_train_pred_ann_1_adam, y_test_ann_1_adam, y_pred_ann_1_adam)
 
     # ANN with 1 hidden layer classification (SGD)
     y_train_ann_1_sgd, y_train_pred_ann_1_sgd, y_test_ann_1_sgd, y_pred_ann_1_sgd = ann_1_hidden_layer_classification_sgd(data)
@@ -102,12 +138,9 @@ def main():
     error_rate_train_ann1_sgd = 1 - results_ann_1_sgd['train']['accuracy']
     error_rate_test_ann1_sgd = 1 - results_ann_1_sgd['test']['accuracy']
 
-    print_ann_1_hidden_layer_sgd(results_ann_1_sgd, error_rate_train_ann1_sgd, error_rate_test_ann1_sgd)
+    print_ann_1_hidden_layer_sgd(results_ann_1_sgd, error_rate_train_ann1_sgd, error_rate_test_ann1_sgd, y_train_ann_1_sgd, y_train_pred_ann_1_sgd, y_test_ann_1_sgd, y_pred_ann_1_sgd)
 
-    print("\nError Rate (Training):", error_rate_train_ann1_sgd)
-    print("Error Rate (Test):", error_rate_test_ann1_sgd)
-
-    # ANN with 1 hidden layer classification (RMSprop)
+     # ANN with 1 hidden layer classification (RMSprop)
     y_train_ann_1_rmsprop, y_train_pred_ann_1_rmsprop, y_test_ann_1_rmsprop, y_pred_ann_1_rmsprop = ann_1_hidden_layer_classification_rmsprop(data)
 
     # Evaluate model
@@ -117,7 +150,7 @@ def main():
     error_rate_train_ann1_rmsprop = 1 - results_ann_1_rmsprop['train']['accuracy']
     error_rate_test_ann1_rmsprop = 1 - results_ann_1_rmsprop['test']['accuracy']
 
-    print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann1_rmsprop, error_rate_test_ann1_rmsprop)
+    print_ann_1_hidden_layer_rmsprop(results_ann_1_rmsprop, error_rate_train_ann1_rmsprop, error_rate_test_ann1_rmsprop, y_train_ann_1_rmsprop, y_train_pred_ann_1_rmsprop, y_test_ann_1_rmsprop, y_pred_ann_1_rmsprop)
 
     # Linear SVM classification
     y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm = linear_svm_classification(data)
@@ -129,6 +162,7 @@ def main():
     error_rate_test_svm = 1 - results_svm['test']['accuracy']
 
     print_linear_svm(results_svm, error_rate_train_svm, error_rate_test_svm, y_train_svm, y_train_pred_svm, y_test_svm, y_pred_svm)
+
 
 # Call the function
 main()

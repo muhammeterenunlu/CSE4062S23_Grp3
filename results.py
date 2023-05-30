@@ -77,7 +77,7 @@ def print_decision_tree_gradient_boosting(results_gb, error_rate_train_gb, error
     print("\nError Rate (Training):", error_rate_train_gb)
     print("Error Rate (Test):", error_rate_test_gb)
 
-def print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam, error_rate_test_ann1_adam):
+def print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam, error_rate_test_ann1_adam, y_train_ann1_adam, y_train_pred_ann1_adam, y_test_ann1_adam, y_pred_ann1_adam):
     print("\nANN with 1 Hidden Layer (ADAM Optimizer)")
     print("-------------------------")
     print("Training set results:")
@@ -85,12 +85,16 @@ def print_ann_1_hidden_layer_adam(results_ann_1_adam, error_rate_train_ann1_adam
     print("Recall:", results_ann_1_adam['train']['recall'])
     print("Precision:", results_ann_1_adam['train']['precision'])
     print("F1 Score:", results_ann_1_adam['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_ann1_adam, y_train_pred_ann1_adam, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_ann1_adam, y_train_pred_ann1_adam, average='micro'))
 
     print("\nTest set results:")
     print("Accuracy:", results_ann_1_adam['test']['accuracy'])
     print("Recall:", results_ann_1_adam['test']['recall'])
     print("Precision:", results_ann_1_adam['test']['precision'])
     print("F1 Score:", results_ann_1_adam['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_ann1_adam, y_pred_ann1_adam, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_ann1_adam, y_pred_ann1_adam, average='micro'))
 
     print("\nError Rate (Training):", error_rate_train_ann1_adam)
     print("Error Rate (Test):", error_rate_test_ann1_adam)
@@ -163,3 +167,74 @@ def print_linear_svm(results_svm, error_rate_train_svm, error_rate_test_svm, y_t
     print("\nError Rate (Training):", error_rate_train_svm)
     print("Error Rate (Test):", error_rate_test_svm)
 
+def print_bernoulli_naive_bayes(results_nb_bernoulli, error_rate_train_nb_bernoulli, error_rate_test_nb_bernoulli, y_train_nb_bernoulli, y_train_pred_nb_bernoulli, y_test_nb_bernoulli, y_pred_nb_bernoulli):
+    print("Bernoulli Naive Bayes")
+    print("---------------------")
+    print("Training set results:")
+    print("Accuracy:", results_nb_bernoulli['train']['accuracy'])
+    print("Recall:", results_nb_bernoulli['train']['recall'])
+    print("Precision:", results_nb_bernoulli['train']['precision'])
+    print("F1 Score:", results_nb_bernoulli['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_nb_bernoulli, y_train_pred_nb_bernoulli, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_nb_bernoulli, y_train_pred_nb_bernoulli, average='micro'))
+    print_confusion_matrix(y_train_nb_bernoulli, y_train_pred_nb_bernoulli, title="Training Set Confusion Matrix")
+
+    print("\nTest set results:")
+    print("Accuracy:", results_nb_bernoulli['test']['accuracy'])
+    print("Recall:", results_nb_bernoulli['test']['recall'])
+    print("Precision:", results_nb_bernoulli['test']['precision'])
+    print("F1 Score:", results_nb_bernoulli['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_nb_bernoulli, y_pred_nb_bernoulli, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_nb_bernoulli, y_pred_nb_bernoulli, average='micro'))
+    print_confusion_matrix(y_test_nb_bernoulli, y_pred_nb_bernoulli, title="Test Set Confusion Matrix")
+
+    print("\nError Rate (Training):", error_rate_train_nb_bernoulli)
+    print("Error Rate (Test):", error_rate_test_nb_bernoulli)
+
+def print_multinomial_naive_bayes(results_nb_multinomial, error_rate_train_nb_multinomial, error_rate_test_nb_multinomial, y_train_nb_multinomial, y_train_pred_nb_multinomial, y_test_nb_multinomial, y_pred_nb_multinomial):
+    print("Multinomial Naive Bayes")
+    print("-----------------------")
+    print("Training set results:")
+    print("Accuracy:", results_nb_multinomial['train']['accuracy'])
+    print("Recall:", results_nb_multinomial['train']['recall'])
+    print("Precision:", results_nb_multinomial['train']['precision'])
+    print("F1 Score:", results_nb_multinomial['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_nb_multinomial, y_train_pred_nb_multinomial, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_nb_multinomial, y_train_pred_nb_multinomial, average='micro'))
+    print_confusion_matrix(y_train_nb_multinomial, y_train_pred_nb_multinomial, title="Training Set Confusion Matrix")
+
+    print("\nTest set results:")
+    print("Accuracy:", results_nb_multinomial['test']['accuracy'])
+    print("Recall:", results_nb_multinomial['test']['recall'])
+    print("Precision:", results_nb_multinomial['test']['precision'])
+    print("F1 Score:", results_nb_multinomial['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_nb_multinomial, y_pred_nb_multinomial, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_nb_multinomial, y_pred_nb_multinomial, average='micro'))
+    print_confusion_matrix(y_test_nb_multinomial, y_pred_nb_multinomial, title="Test Set Confusion Matrix")
+
+    print("\nError Rate (Training):", error_rate_train_nb_multinomial)
+    print("Error Rate (Test):", error_rate_test_nb_multinomial)
+
+def print_gaussian_naive_bayes(results_nb_gaussian, error_rate_train_nb_gaussian, error_rate_test_nb_gaussian, y_train_nb_gaussian, y_train_pred_nb_gaussian, y_test_nb_gaussian, y_pred_nb_gaussian):
+    print("Gaussian Naive Bayes")
+    print("--------------------")
+    print("Training set results:")
+    print("Accuracy:", results_nb_gaussian['train']['accuracy'])
+    print("Recall:", results_nb_gaussian['train']['recall'])
+    print("Precision:", results_nb_gaussian['train']['precision'])
+    print("F1 Score:", results_nb_gaussian['train']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_train_nb_gaussian, y_train_pred_nb_gaussian, average='macro'))
+    print("Micro F1 Score:", f1_score(y_train_nb_gaussian, y_train_pred_nb_gaussian, average='micro'))
+    print_confusion_matrix(y_train_nb_gaussian, y_train_pred_nb_gaussian, title="Training Set Confusion Matrix")
+
+    print("\nTest set results:")
+    print("Accuracy:", results_nb_gaussian['test']['accuracy'])
+    print("Recall:", results_nb_gaussian['test']['recall'])
+    print("Precision:", results_nb_gaussian['test']['precision'])
+    print("F1 Score:", results_nb_gaussian['test']['f1_score'])
+    print("Macro F1 Score:", f1_score(y_test_nb_gaussian, y_pred_nb_gaussian, average='macro'))
+    print("Micro F1 Score:", f1_score(y_test_nb_gaussian, y_pred_nb_gaussian, average='micro'))
+    print_confusion_matrix(y_test_nb_gaussian, y_pred_nb_gaussian, title="Test Set Confusion Matrix")
+
+    print("\nError Rate (Training):", error_rate_train_nb_gaussian)
+    print("Error Rate (Test):", error_rate_test_nb_gaussian)

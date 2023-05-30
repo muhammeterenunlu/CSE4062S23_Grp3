@@ -22,7 +22,7 @@ class KNNClassifier:
         self.y_train = y
 
     def Cos_distance(self, x1, x2):
-        return (np.dot(x1,x2))/(np.sqrt(np.sum((x1) ** 2))*np.sqrt(np.sum((x2))
+        return (np.dot(x1,x2))/(np.sqrt(np.sum((x1) ** 2)))*np.sqrt(np.sum((x2)))
 
     def predict(self, X):
         X_encoded = self.preprocess_data(X)
