@@ -90,4 +90,7 @@ def prepare_data(data):
     for column in label_encoding_columns:
         data[column] = label_encoder.fit_transform(data[column])
 
+    # Save the preprocessed data to a XLSX file
+    data.to_excel('preprocessed_data.xlsx', index=False)
+
     return data

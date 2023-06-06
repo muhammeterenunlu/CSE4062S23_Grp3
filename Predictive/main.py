@@ -17,8 +17,10 @@ from results import print_decision_tree_info_gain, print_decision_tree_gini_inde
 
 def main():
     # Ensure figures directory exists
-    if not os.path.exists("figures"):
-        os.makedirs("figures")
+    #if not os.path.exists("figures"):
+    #    os.makedirs("figures")
+
+    os.chdir("c:/Users/user/Desktop/CSE4062S23_Grp3/Predictive/")
 
     # Load original data
     data = pd.read_excel("data.xlsx", engine="openpyxl", header=0, sheet_name=3)
