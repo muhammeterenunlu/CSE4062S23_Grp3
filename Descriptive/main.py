@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from preprocessing import prepare_data
 from kmeans import kmeans_clustering
+from hierarchical_clustering import hierarchical_clustering
+from dbscan import dbscan_clustering
 
 def main():
     # Ensure figures directory exists
@@ -35,6 +37,13 @@ def main():
 
     # Call the kmeans_clustering function
     kmeans_clustering()
+
+    # Call the hierarchical_clustering function
+    hierarchical_clustering()
+
+    # Call the dbscan_clustering function
+    dbscan_clustering()
+
 
 # Call the function
 main()
