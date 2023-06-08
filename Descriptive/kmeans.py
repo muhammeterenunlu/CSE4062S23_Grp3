@@ -44,8 +44,8 @@ def kmeans_clustering():
     plt.savefig(os.path.join('figures', 'silhouette_scores.png')) # Save the figure
     plt.close()
 
-    # Determine the optimal number of clusters (elbow is at 2 in this example)
-    optimal_cluster_number = 2
+    # Determine the optimal number of clusters
+    optimal_cluster_number = 3
     kmeans = KMeans(n_clusters=optimal_cluster_number, init='k-means++', max_iter=300, n_init=10, random_state=0)
     print("Number of clusters for kmean(calculated by elbow method & silhouette score): " + str(optimal_cluster_number) + "\n")
     pred_y = kmeans.fit_predict(data_pca)

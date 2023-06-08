@@ -4,6 +4,8 @@ from preprocessing import prepare_data
 from kmeans import kmeans_clustering
 from hierarchical_clustering import hierarchical_clustering
 from dbscan import dbscan_clustering
+from apriori import apriori_algorithm
+from fp_growth import fpgrowth_algorithm
 
 def main():
     # Ensure figures directory exists
@@ -35,6 +37,8 @@ def main():
     # How many rows and columns are there in the preprocessed data?
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
+    apriori_algorithm()
+
     # Call the kmeans_clustering function
     kmeans_clustering()
 
@@ -44,6 +48,8 @@ def main():
     # Call the dbscan_clustering function
     dbscan_clustering()
 
+    # Call the fpgrowth_algorithm function
+    fpgrowth_algorithm()
 
 # Call the function
 main()
