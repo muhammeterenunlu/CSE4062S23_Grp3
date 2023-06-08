@@ -37,8 +37,6 @@ def main():
     # How many rows and columns are there in the preprocessed data?
     print("\nNumber of rows and columns in the preprocessed data:", data.shape)
 
-    apriori_algorithm()
-
     # Call the kmeans_clustering function
     kmeans_clustering()
 
@@ -47,6 +45,9 @@ def main():
 
     # Call the dbscan_clustering function
     dbscan_clustering()
+
+    # Call the apriori_algorithm function
+    apriori_algorithm()
 
     # Call the fpgrowth_algorithm function
     fpgrowth_algorithm()
